@@ -78,8 +78,7 @@ fun WeatherDetailsView(weatherDetails: WeatherDetails?) {
             modifier = Modifier,
             fontWeight = FontWeight.Bold
         )
-
-
+        Spacer(modifier = Modifier.height(15.dp))
         LottieAnimation(
             composition,
             progress,
