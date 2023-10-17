@@ -7,6 +7,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.venu.weatherapp.R
 import com.venu.weatherapp.model.weatherDetails.WeatherDetails
 import com.venu.weatherapp.repository.weatherRepository.WeatherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +21,7 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
     ViewModel() {
 
     private val _weatherDetails = MutableLiveData<WeatherDetails>()
+
     val weatherDetails: LiveData<WeatherDetails>
         get() = _weatherDetails
 
@@ -27,6 +31,7 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
     var isLocationSearchNameError by mutableStateOf(false)
 
     var isLoading by mutableStateOf(false)
+
 
     fun validate(): Boolean {
         if (locationSearchName.isEmpty()) {

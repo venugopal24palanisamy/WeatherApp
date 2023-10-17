@@ -90,4 +90,9 @@ dependencies {
     kapt("androidx.hilt:hilt-compiler:1.0.0")
     implementation("androidx.work:work-runtime-ktx:2.8.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+
+    implementation ("com.airbnb.android:lottie-compose:4.0.0")
+
+
+
 }
