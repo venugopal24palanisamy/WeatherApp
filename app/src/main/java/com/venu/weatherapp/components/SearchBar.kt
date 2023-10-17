@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.venu.weatherapp.R
 
@@ -26,10 +27,6 @@ fun SearchBar(
     supportingErrorText: String,
     isSearchError: Boolean
 ) {
-    val modifier = Modifier
-        .fillMaxWidth()
-        .padding(8.dp)
-
     OutlinedTextField(
         value = text,
         onValueChange = { newText -> onTextChange(newText) },
@@ -50,7 +47,9 @@ fun SearchBar(
             textColor = Color.Black,
 
             ),
-        modifier = modifier,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
         isError = isSearchError,
         supportingText = {
             if (isSearchError) Text(
@@ -58,4 +57,13 @@ fun SearchBar(
             )
         }
     )
+
+
 }
+
+@Preview(showBackground = true)
+@Composable
+fun SearchBarPreview() {
+    SearchBar("", {}, {}, "", false)
+}
+

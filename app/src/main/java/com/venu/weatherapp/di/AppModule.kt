@@ -1,20 +1,17 @@
 package com.venu.weatherapp.di
 
 import com.venu.weatherapp.api.ApiService
-import com.venu.weatherapp.repository.weatherRepository.WeatherRepository
 import com.venu.weatherapp.utils.Constants
 import com.venu.weatherapp.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
