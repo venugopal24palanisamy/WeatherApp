@@ -19,44 +19,8 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
-
     @GET(SEARCH_BY_CITY_NAME)
     suspend fun getCityDetailByName(@Query("q") cityName: String?): Response<LocationData>
-
     @GET(GET_WEATHER_BY_CITY_DETAILS)
     suspend fun getWeatherReportDetail(@Query("q") locationDetails: String?): Response<WeatherDetails>
-
-    companion object {
-
-        var apiService: ApiService? = null
-        fun getInstance(): ApiService {
-            if (apiService == null) {
-                val loggingInterceptor = HttpLoggingInterceptor()
-                loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-                apiService = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create()).client(
-                        OkHttpClient
-                            .Builder().addInterceptor(HeaderInterceptor())
-                            .addInterceptor(loggingInterceptor)
-                            .build()
-                    )
-                    .build().create(ApiService::class.java)
-            }
-            return apiService!!
-        }
-
-        class HeaderInterceptor : Interceptor {
-            override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
-                val request = chain.request()
-                    .newBuilder()
-                    .addHeader(API_KEY_HEADER, API_KEY)
-                    .addHeader(HOST_HEADER, API_HOST)
-                    .build()
-                return chain.proceed(request)
-            }
-        }
-
-    }
-
 }

@@ -14,7 +14,9 @@ import androidx.navigation.compose.rememberNavController
 import com.venu.weatherapp.navigation.AppNavigation
 import com.venu.weatherapp.ui.theme.WeatherAppTheme
 import com.venu.weatherapp.view.weatherScreen.WeatherScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

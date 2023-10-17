@@ -14,6 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.venu.weatherapp.model.weatherDetails.WeatherDetails
+import com.venu.weatherapp.utils.MyFunctions
 
 @Composable
 fun WeatherDetailsView(weatherDetails: WeatherDetails?) {
@@ -40,11 +41,26 @@ fun WeatherDetailsView(weatherDetails: WeatherDetails?) {
         Text(
             text = weatherDetails.current.condition.text,
             textAlign = TextAlign.Center,
-            fontSize = 16.sp,
+            fontSize = 20.sp,
             modifier = Modifier,
-            fontWeight = FontWeight.Medium
+            fontWeight = FontWeight.Bold
         )
-
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "${MyFunctions.getCurrentDay()} - ${weatherDetails.location.name}",
+            textAlign = TextAlign.Center,
+            fontSize = 18.sp,
+            modifier = Modifier,
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Humidity - ${weatherDetails.current.humidity}%",
+            textAlign = TextAlign.Center,
+            fontSize = 18.sp,
+            modifier = Modifier,
+            fontWeight = FontWeight.Bold
+        )
     }
 
 }

@@ -9,9 +9,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.venu.weatherapp.model.weatherDetails.WeatherDetails
 import com.venu.weatherapp.repository.weatherRepository.WeatherRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
+@HiltViewModel
+class WeatherViewModel @Inject constructor(private val weatherRepository: WeatherRepository) :
+    ViewModel() {
 
     private val _weatherDetails = MutableLiveData<WeatherDetails>()
     val weatherDetails: LiveData<WeatherDetails>
@@ -19,7 +23,7 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
 
     var locationSearchName by mutableStateOf("")
     var locationSearchNameError by mutableStateOf("")
-    var latLng by mutableStateOf("")
+    private var latLng by mutableStateOf("")
     var isLocationSearchNameError by mutableStateOf(false)
 
     var isLoading by mutableStateOf(false)
@@ -41,9 +45,11 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
             isLoading = true
             weatherRepository.searchByCityName(locationSearchName).let {
                 isLoading = false
-                //_locationDetails.value = if (it.isSuccessful) it.body() else null
-                latLng = if (it.isSuccessful) "${it.body()!![0].lat},${it.body()!![0].lon}" else ""
-                getWeatherReportByLatLng()
+                if (it.isSuccessful) {
+                    latLng =
+                        if (it.body()?.size!! > 0) "${it.body()!![0].lat},${it.body()!![0].lon}" else ""
+                    if (latLng.isNotEmpty()) getWeatherReportByLatLng()
+                }
             }
         }
     }
